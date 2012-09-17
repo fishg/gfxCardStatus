@@ -177,6 +177,12 @@
 
 - (IBAction)quit:(id)sender
 {
+    // Set the machine to dynamic switching before shutdown to avoid machine restarting
+    // stuck in a forced GPU mode.
+    if (![GSGPU isLegacyMachine])
+        [GSMux setMode:GSSwitcherModeDynamicSwitching];
+    
+    GTMLoggerDebug(@"Termination notification received. Going to Dynamic Switching.");
     [[NSApplication sharedApplication] terminate:self];
 }
 

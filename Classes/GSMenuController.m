@@ -175,6 +175,11 @@
 
 - (IBAction)quit:(id)sender
 {
+    if (![GSGPU isLegacyMachine])
+    [GSMux setMode:GSSwitcherModeDynamicSwitching];
+    
+    GTMLoggerDebug(@"Termination notification received. Going to Dynamic Switching.");
+    
     [[NSApplication sharedApplication] terminate:self];
 }
 

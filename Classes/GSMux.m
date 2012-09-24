@@ -311,7 +311,7 @@ static void dumpState(io_connect_t connect)
             setDynamicSwitchingEnabled(_switcherConnect, NO);
             
             // Disable Policy, otherwise gpu switches to Discrete after a bad
-            // app closes. Only do this on 2011+ MacBook Pros since 2010 models
+            // app closes. Only do this on 2011+ MacBook Pros since 2010 models 
             // go nuts when this happens.
             if (![GSGPU is2010MacBookPro]) {
                 setFeatureInfo(_switcherConnect, Policy, NO);
@@ -319,11 +319,16 @@ static void dumpState(io_connect_t connect)
             }
             
             // Hold up a sec!
-            sleep(1);
+            sleep(2);
             
             BOOL integrated = [GSMux isUsingIntegratedGPU];
-            if ((mode==GSSwitcherModeForceIntegrated && !integrated) || (mode==GSSwitcherModeForceDiscrete && integrated))
+            if ((mode==GSSwitcherModeForceIntegrated && !integrated) || (mode==GSSwitcherModeForceDiscrete && integrated)){
+                GTMLoggerDebug(@"=====from is Integrated:%d to another====",integrated);
                 forceSwitch(_switcherConnect);
+                //sleep(2);
+                //integrated = [GSMux isUsingIntegratedGPU];
+                //GTMLoggerDebug(@"=====from is Integrated:%d to another====",integrated);
+            }
             
             break;
         case GSSwitcherModeDynamicSwitching:

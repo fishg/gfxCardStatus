@@ -107,7 +107,7 @@
 
 - (void)updateMenu
 {
-    GTMLoggerDebug(@"Updating status...");
+    GTMLoggerDebug(@"=====Updating menu status...");
 
     BOOL isUsingIntegrated = [GSMux isUsingIntegratedGPU];
 
@@ -182,7 +182,7 @@
     if (![GSGPU isLegacyMachine])
         [GSMux setMode:GSSwitcherModeDynamicSwitching];
     
-    GTMLoggerDebug(@"Termination notification received. Going to Dynamic Switching.");
+    GTMLoggerDebug(@"Quit event received. Going to Dynamic Switching.");
     [[NSApplication sharedApplication] terminate:self];
 }
 

@@ -109,6 +109,8 @@
     // Selector called in response to application termination notification from
     // NSWorkspace. Also implemented to avoid the machine shuting down in a forced
     // GPU state.
+    if (![GSGPU isLegacyMachine])
+        [GSMux setMode:GSSwitcherModeDynamicSwitching];
     [[NSApplication sharedApplication] terminate:self];
     GTMLoggerDebug(@"NSWorkspaceWillPowerOff notification received. Terminating application.");
 }
